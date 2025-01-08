@@ -1,0 +1,22 @@
+
+@startuml
+actor Usuario as U
+participant "Interfaz Web" as IW
+participant "GraphQL API" as API
+participant "ReservaService" as RS
+participant "LibroService" as LS
+participant "Base de Datos" as DB
+
+U -> IW: Solicitar reserva de libro (ID libro)
+IW -> API: Mutation: reservarLibro(usuarioID, libroID)
+API -> RS: validarDisponibilidad(libroID)
+RS -> LS: obtenerLibro(libroID)
+LS -> DB: SELECT * FROM libros WHERE id = libroID
+DB --> LS: Detalles del libro
+LS --> RS: Libro disponible
+RS -> DB: INSERT INTO reservas (usuarioID, libroID, estado, fechaReserva)
+DB --> RS: Reserva registrada
+RS --> API: Resultado de la reserva
+API --> IW: Confirmación de la reserva
+IW --> U: Reserva confirmada
+@enduml

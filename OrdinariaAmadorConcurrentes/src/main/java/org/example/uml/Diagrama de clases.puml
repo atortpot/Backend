@@ -1,0 +1,66 @@
+
+@startuml
+class Libro {
+    +id: String
+    +titulo: String
+    +autor: Autor
+    +categoria: Categoria
+    +disponibilidad: Boolean
+    +reserva: Reserva
+}
+
+class Autor {
+    +id: String
+    +nombre: String
+    +libros: List<Libro>
+}
+
+class Categoria {
+    +id: String
+    +nombre: String
+    +descripcion: String
+    +libros: List<Libro>
+}
+
+class Usuario {
+    +id: String
+    +nombre: String
+    +correo: String
+    +reservas: List<Reserva>
+    +prestamos: List<Prestamo>
+}
+
+class Reserva {
+    +id: String
+    +usuario: Usuario
+    +libro: Libro
+    +fechaReserva: LocalDate
+    +estado: EstadoReserva
+}
+
+class Prestamo {
+    +id: String
+    +usuario: Usuario
+    +libro: Libro
+    +fechaPrestamo: LocalDate
+    +fechaDevolucion: LocalDate
+}
+
+enum EstadoReserva {
+    PENDIENTE
+    CONFIRMADA
+    CANCELADA
+}
+
+Libro "1" --> "1" Reserva
+Libro "1" --> "1" Autor
+Libro "1" --> "1" Categoria
+Usuario "1" --> "*" Reserva
+Usuario "1" --> "*" Prestamo
+Reserva "1" --> "1" Usuario
+Reserva "1" --> "1" Libro
+Prestamo "1" --> "1" Usuario
+Prestamo "1" --> "1" Libro
+Categoria "1" --> "*" Libro
+Autor "1" --> "*" Libro
+@enduml

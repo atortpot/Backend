@@ -1,0 +1,32 @@
+@startuml
+left to right direction
+
+actor Usuario as U
+actor Administrador as A
+
+usecase "Buscar libros\n(por título, autor o categoría)" as UC1
+usecase "Reservar libros" as UC2
+usecase "Pedir libros prestados" as UC3
+usecase "Agregar libros" as UC4
+usecase "Editar libros" as UC5
+usecase "Eliminar libros" as UC6
+usecase "Agregar categorías" as UC7
+usecase "Editar categorías" as UC8
+usecase "Eliminar categorías" as UC9
+usecase "Agregar autores" as UC10
+usecase "Editar autores" as UC11
+usecase "Eliminar autores" as UC12
+
+U --> UC1
+U --> UC2
+U --> UC3
+A --> UC4
+A --> UC5
+A --> UC6
+A --> UC7
+A --> UC8
+A --> UC9
+A --> UC10
+A --> UC11
+A --> UC12
+@enduml

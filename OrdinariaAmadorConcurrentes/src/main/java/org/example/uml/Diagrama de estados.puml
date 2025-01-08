@@ -1,0 +1,24 @@
+
+@startuml
+[*] --> Disponible : Libro no reservado
+
+state Disponible {
+    [*] --> SinReserva
+    SinReserva --> Reservado : Reserva solicitada
+}
+
+state Reservado {
+    [*] --> Pendiente : Reserva creada
+    Pendiente --> Confirmado : Confirmación por el sistema
+    Pendiente --> Cancelado : Reserva cancelada por el usuario
+}
+
+state Prestado {
+    [*] --> EnUso : Libro entregado al usuario
+    EnUso --> Devuelto : Libro devuelto
+}
+
+Disponible --> Reservado : Libro reservado
+Reservado --> Prestado : Libro prestado al usuario
+Prestado --> Disponible : Libro devuelto y disponible
+@enduml
